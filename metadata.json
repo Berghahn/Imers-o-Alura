@@ -1,0 +1,6 @@
+{
+  "name": "Desafio 1 Alura - Calculadora Python",
+  "description": "Calculadora Python simples e didática com 4 operações (+, -, *, /), exibição em tempo real de cada resultado e histórico de cálculos explicados passo a passo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
