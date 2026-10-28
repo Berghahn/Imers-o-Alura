@@ -64,11 +64,12 @@ export const HistoryList: React.FC<HistoryListProps> = ({
           <div className="space-y-2.5 max-h-[320px] overflow-y-auto pr-1">
             {records.map((record, index) => {
               const isCopied = copiedId === record.id;
-              const opNames = {
+              const opNames: Record<string, string> = {
                 '+': 'Soma',
                 '-': 'Subtração',
                 '*': 'Multiplicação',
-                '/': 'Divisão'
+                '/': 'Divisão',
+                '%': 'Porcentagem'
               };
 
               return (

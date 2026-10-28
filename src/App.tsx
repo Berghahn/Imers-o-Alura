@@ -104,7 +104,7 @@ export default function App() {
                 <span>Ambiente Interativo</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-extrabold text-white">
-                Calculadora das 4 Operações &amp; Histórico
+                Calculadora de Operações &amp; Histórico
               </h2>
             </div>
 

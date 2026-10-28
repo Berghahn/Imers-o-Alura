@@ -174,21 +174,21 @@ export const PythonTerminal: React.FC<PythonTerminalProps> = ({
       currentLines.push({
         id: (Date.now() + 1).toString(),
         type: 'prompt',
-        text: 'Escolha a operação (+ para Soma, - para Subtração, * para Multiplicação, / para Divisão): '
+        text: 'Escolha a operação (+ para Soma, - para Subtração, * para Multiplicação, / para Divisão, % para Porcentagem): '
       });
       setLines(currentLines);
       setInputVal('');
     } else if (step === 'op') {
-      if (!['+', '-', '*', '/'].includes(trimmed)) {
+      if (!['+', '-', '*', '/', '%'].includes(trimmed)) {
         currentLines.push({
           id: (Date.now() + 1).toString(),
           type: 'error',
-          text: 'Operação inválida! Por favor, digite apenas +, -, * ou /.'
+          text: 'Operação inválida! Por favor, digite apenas +, -, *, / ou %.'
         });
         currentLines.push({
           id: (Date.now() + 2).toString(),
           type: 'prompt',
-          text: 'Escolha a operação (+, -, *, /): '
+          text: 'Escolha a operação (+, -, *, /, %): '
         });
         setLines(currentLines);
         setInputVal('');
@@ -247,6 +247,9 @@ export const PythonTerminal: React.FC<PythonTerminalProps> = ({
           res = n1 / n2;
           pySnippet = `resultado = ${n1} / ${n2}  # = ${res}`;
         }
+      } else if (op === '%') {
+        res = (n1 * n2) / 100;
+        pySnippet = `resultado = (${n1} * ${n2}) / 100  # = ${res} (${n2}% de ${n1})`;
       }
 
       if (typeof res === 'number' && !Number.isInteger(res)) {
@@ -281,10 +284,13 @@ export const PythonTerminal: React.FC<PythonTerminalProps> = ({
           text: `[!] ZeroDivisionError: Não é possível dividir por zero! (num2 = 0)`
         });
       } else {
+        const resultMsg = op === '%'
+          ? `>>> Resultado do cálculo: ${n2}% de ${n1} = ${res}`
+          : `>>> Resultado do cálculo: ${n1} ${op} ${n2} = ${res}`;
         currentLines.push({
           id: (Date.now() + 2).toString(),
           type: 'success',
-          text: `>>> Resultado do cálculo: ${n1} ${op} ${n2} = ${res}`
+          text: resultMsg
         });
       }
 
