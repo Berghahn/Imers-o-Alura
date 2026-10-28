@@ -3,6 +3,7 @@
 # 🧮 Calculadora Python — Imersão Alura
 
 [![Alura](https://img.shields.io/badge/Imers%C3%A3o-Engenharia%20de%20Software%20com%20IA-blue?style=for-the-badge&logo=alura)](https://www.alura.com.br/)
+[![Branch Versão-2](https://img.shields.io/badge/Branch-Vers%C3%A3o--2-2ea44f?style=for-the-badge&logo=git)](https://github.com/Berghahn/Imers-o-Alura/tree/Vers%C3%A3o-2)
 [![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-8.0-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
@@ -21,6 +22,20 @@
 <img src="./Desafio1Alura.png" alt="Demonstração da Calculadora" width="800px" style="border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);" />
 
 </div>
+
+---
+
+## 🌿 Branches e Versões do Projeto
+
+Este repositório está organizado em branches para documentar o avanço e as melhorias do projeto:
+
+* 🌟 **[Branch Versão-2 (Versão Mais Recente)](https://github.com/Berghahn/Imers-o-Alura/tree/Vers%C3%A3o-2):** Contém a nova versão aprimorada da aplicação, incluindo suporte completo ao cálculo de **Porcentagem (`%`)**, demonstração atualizada do layout com `Desafio1Alura.png` e refinamentos didáticos.
+* 📌 **[Branch main](https://github.com/Berghahn/Imers-o-Alura/tree/main):** Versão inicial base com as 4 operações fundamentais.
+
+Para alternar localmente para a **Versão 2**:
+```bash
+git checkout Versão-2
+```
 
 ---
 
@@ -112,7 +127,8 @@ Imers-o-Alura/
 
 1. **Clone este repositório:**
    ```bash
-   git clone https://github.com/Berghahn/Imers-o-Alura.git
+   # Para clonar diretamente a branch da Versão 2:
+   git clone -b Versão-2 https://github.com/Berghahn/Imers-o-Alura.git
    cd Imers-o-Alura
    ```
 
