@@ -24,6 +24,7 @@ export const VisualCalculator: React.FC<VisualCalculatorProps> = ({
     { label: 'Subtração: 100 - 38', n1: '100', op: '-' as OperationType, n2: '38' },
     { label: 'Multiplicação: 8 * 12.5', n1: '8', op: '*' as OperationType, n2: '12.5' },
     { label: 'Divisão: 144 / 12', n1: '144', op: '/' as OperationType, n2: '12' },
+    { label: 'Porcentagem: 15% de 200', n1: '200', op: '%' as OperationType, n2: '15' },
     { label: 'Teste Zero: 50 / 0', n1: '50', op: '/' as OperationType, n2: '0' }
   ];
 
@@ -124,6 +125,9 @@ export const VisualCalculator: React.FC<VisualCalculatorProps> = ({
         calculatedResult = n1 / n2;
         pySnippet = `resultado = ${n1} / ${n2}  # = ${calculatedResult}`;
       }
+    } else if (operation === '%') {
+      calculatedResult = (n1 * n2) / 100;
+      pySnippet = `resultado = (${n1} * ${n2}) / 100  # = ${calculatedResult} (${n2}% de ${n1})`;
     }
 
     // Round clean floats if lengthy decimal
@@ -188,6 +192,8 @@ export const VisualCalculator: React.FC<VisualCalculatorProps> = ({
       } else if (e.key === '/') {
         e.preventDefault();
         handleSelectOperation('/');
+      } else if (e.key === '%') {
+        handleSelectOperation('%');
       } else if (e.key === 'Enter' || e.key === '=') {
         e.preventDefault();
         handleCalculate();
@@ -288,18 +294,19 @@ export const VisualCalculator: React.FC<VisualCalculatorProps> = ({
           </div>
         )}
 
-        {/* 4 Operations Selector Buttons */}
+        {/* Operations Selector Buttons */}
         <div className="mb-4">
           <div className="text-xs font-semibold text-slate-400 mb-2 uppercase tracking-wider">
-            Escolha uma das 4 Operações Lógicas:
+            Escolha a Operação Desejada:
           </div>
-          <div className="grid grid-cols-4 gap-2">
+          <div className="grid grid-cols-5 gap-2">
             {(
               [
                 { op: '+', name: 'Soma', symbol: '+' },
                 { op: '-', name: 'Subtração', symbol: '-' },
                 { op: '*', name: 'Multiplicação', symbol: '*' },
-                { op: '/', name: 'Divisão', symbol: '/' }
+                { op: '/', name: 'Divisão', symbol: '/' },
+                { op: '%', name: 'Porcentagem', symbol: '%' }
               ] as const
             ).map(item => {
               const isSelected = operation === item.op;
@@ -426,10 +433,14 @@ export const VisualCalculator: React.FC<VisualCalculatorProps> = ({
             num2 = <span className="text-emerald-400">{num2}</span>
           </div>
           <div className="text-cyan-300">
-            resultado = {num1} {operation || '+'} {num2}
+            {operation === '%'
+              ? `resultado = (${num1} * ${num2}) / 100  # ${num2}% de ${num1}`
+              : `resultado = ${num1} ${operation || '+'} ${num2}`}
           </div>
           <div className="text-slate-400">
-            historico.append(f&quot;{num1} {operation || '+'} {num2} = &#123;resultado&#125;&quot;)
+            {operation === '%'
+              ? `historico.append(f&quot;{num2}% de {num1} = &#123;resultado&#125;&quot;)`
+              : `historico.append(f&quot;{num1} {operation || '+'} {num2} = &#123;resultado&#125;&quot;)`}
           </div>
         </div>
       </div>

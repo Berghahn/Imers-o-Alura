@@ -18,7 +18,7 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToCalculator, onScrollToCode
           <span aria-hidden="true" className="text-slate-600">·</span>
           <span>Formação Python Alura</span>
           <span aria-hidden="true" className="text-slate-600">·</span>
-          <span>4 Operações Lógicas (+, -, *, /)</span>
+          <span>Operações (+, -, *, /, %)</span>
           <span aria-hidden="true" className="text-slate-600">·</span>
           <span>Histórico de Resultados</span>
         </div>
@@ -27,11 +27,11 @@ export const Hero: React.FC<HeroProps> = ({ onScrollToCalculator, onScrollToCode
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-7">
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight text-balance">
-              Calculadora Python com as 4 Operações e Exibição de Resultados
+              Calculadora Python com Operações Aritméticas e Porcentagem
             </h1>
             <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed max-w-2xl">
               Código simples, limpo e detalhadamente explicado para o <span className="text-emerald-400 font-semibold">Desafio 1 da Alura</span>. 
-              Realize cálculos matemáticos com soma, subtração, multiplicação e divisão, consulte o histórico salvo a cada operação e execute no terminal interativo.
+              Realize cálculos matemáticos com soma, subtração, multiplicação, divisão e porcentagem, consulte o histórico salvo a cada operação e execute no terminal interativo.
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">

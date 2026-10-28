@@ -8,7 +8,7 @@ export const PYTHON_VERSIONS: PythonCodeVersion[] = [
     description: 'Código direto e linear: recebe 2 números, pergunta a operação, calcula, exibe o resultado e salva no histórico.',
     code: `# ====================================================
 # Desafio 1 Alura - Calculadora Básica em Python
-# 4 Operações: Soma (+), Subtração (-), Multiplicação (*), Divisão (/)
+# Operações: Soma (+), Subtração (-), Multiplicação (*), Divisão (/), Porcentagem (%)
 # ====================================================
 
 # Lista para armazenar o histórico de cálculos realizados
@@ -26,7 +26,8 @@ print("+ : Adição")
 print("- : Subtração")
 print("* : Multiplicação")
 print("/ : Divisão")
-operacao = input("\\nEscolha a operação (+, -, *, /): ")
+print("% : Porcentagem")
+operacao = input("\\nEscolha a operação (+, -, *, /, %): ")
 
 # 3. Tomada de decisão com if, elif e else
 if operacao == '+':
@@ -45,6 +46,10 @@ elif operacao == '/':
     else:
         resultado = num1 / num2
         mensagem = f"{num1} / {num2} = {resultado}"
+elif operacao == '%':
+    # Cálculo de porcentagem: num2% de num1
+    resultado = (num1 * num2) / 100
+    mensagem = f"{num2}% de {num1} = {resultado}"
 else:
     mensagem = "Operação inválida!"
 
@@ -94,7 +99,14 @@ print(f"Total de cálculos no histórico: {len(historico)}")
         aluraTip: 'Tratar erros de entrada antes de executar o cálculo é uma das boas práticas mais cobradas na Alura.'
       },
       {
-        lineNumber: 45,
+        lineNumber: 48,
+        code: 'elif operacao == \'%\':',
+        title: 'Cálculo de Porcentagem',
+        explanation: 'Calcula `num2` por cento de `num1` usando a fórmula `(num1 * num2) / 100`. Por exemplo, 15% de 200 resulta em 30.0.',
+        aluraTip: 'Atenção: No Python puro, o operador `%` calcula o resto da divisão inteira (módulo). Em uma calculadora, implementamos a porcentagem com a fórmula matemática `(valor * taxa) / 100`.'
+      },
+      {
+        lineNumber: 52,
         code: 'print(f"Resultado do cálculo: {mensagem}")',
         title: 'Exibição Formatada com f-string',
         explanation: 'A f-string (`f"..."`) permite intercalar variáveis diretamente dentro de chaves `{mensagem}` de forma limpa e moderna.',
@@ -131,7 +143,7 @@ while True:
     # 1. Entrada de dados protegida
     try:
         n1 = float(input("Digite o 1º número: "))
-        op = input("Operação (+, -, *, /) ou [H] Histórico ou [S] Sair: ").strip()
+        op = input("Operação (+, -, *, /, %) ou [H] Histórico ou [S] Sair: ").strip()
         
         # Opções especiais de navegação
         if op.lower() == 's':
@@ -168,8 +180,11 @@ while True:
         else:
             res = n1 / n2
             res_formatado = f"{n1} / {n2} = {res}"
+    elif op == '%':
+        res = (n1 * n2) / 100
+        res_formatado = f"{n2}% de {n1} = {res}"
     else:
-        print("Operação inválida! Use apenas +, -, * ou /.")
+        print("Operação inválida! Use apenas +, -, *, / ou %.")
         continue
 
     # 3. Exibição imediata do resultado
@@ -213,7 +228,7 @@ while True:
 
 historico = []
 
-# Definição das 4 operações lógicas como funções independentes
+# Definição das operações como funções independentes
 def somar(a, b):
     return a + b
 
@@ -227,6 +242,9 @@ def dividir(a, b):
     if b == 0:
         return "Erro: divisão por zero"
     return a / b
+
+def porcentagem(total, percentual):
+    return (total * percentual) / 100
 
 def registrar_calculo(a, op, b, resultado):
     registro = f"{a} {op} {b} = {resultado}"
@@ -242,6 +260,7 @@ print(registrar_calculo(num1, '+', num2, somar(num1, num2)))
 print(registrar_calculo(num1, '-', num2, subtrair(num1, num2)))
 print(registrar_calculo(num1, '*', num2, multiplicar(num1, num2)))
 print(registrar_calculo(num1, '/', num2, dividir(num1, num2)))
+print(registrar_calculo(num1, '%', num2, porcentagem(num1, num2)))
 
 print("\\nHistórico salvo:")
 for calc in historico:
@@ -261,6 +280,13 @@ for calc in historico:
         title: 'Função com Validação Interna',
         explanation: 'A própria função verifica se o divisor `b` é igual a 0 antes de tentar dividir, isolando a regra de negócio.',
         aluraTip: 'Centralizar regras dentro de funções evita repetir código em várias partes do sistema.'
+      },
+      {
+        lineNumber: 22,
+        code: 'def porcentagem(total, percentual):',
+        title: 'Função de Porcentagem',
+        explanation: 'Função modular que calcula o percentual de um valor aplicando a fórmula matemática `(total * percentual) / 100`.',
+        aluraTip: 'Criar uma função isolada para porcentagem facilita reutilizar essa conta em outros módulos (como cálculo de descontos ou taxas).'
       }
     ]
   }
@@ -271,22 +297,22 @@ export const DIDACTIC_STEPS = [
     step: '01',
     title: 'Entrada de Dados com `input()` e `float()`',
     summary: 'Como ler o que o usuário digita e converter para números',
-    content: 'Por padrão, toda informação recebida pelo comando `input()` é do tipo texto (`str`). Para realizar operações matemáticas (+, -, *, /), é obrigatório converter para `int()` (número inteiro) ou `float()` (número decimal). Recomendamos `float()` para que sua calculadora consiga somar valores como 10.5 ou 2.25.',
+    content: 'Por padrão, toda informação recebida pelo comando `input()` é do tipo texto (`str`). Para realizar operações matemáticas (+, -, *, /, %), é obrigatório converter para `int()` (número inteiro) ou `float()` (número decimal). Recomendamos `float()` para que sua calculadora consiga somar valores como 10.5 ou 2.25.',
     codeSnippet: 'numero1 = float(input("Digite o primeiro número: "))'
   },
   {
     step: '02',
-    title: 'As 4 Operações Aritméticas Fundamentais',
-    summary: 'Os operadores nativos da linguagem Python',
-    content: 'Python possui operadores matemáticos integrados diretos: `+` para Adição, `-` para Subtração, `*` para Multiplicação e `/` para Divisão. Note que a divisão sempre retorna um valor `float` em Python 3.',
-    codeSnippet: 'soma = a + b\nsubtracao = a - b\nmultiplicacao = a * b\ndivisao = a / b'
+    title: 'Operações Aritméticas e Porcentagem',
+    summary: 'Os operadores nativos da linguagem e a regra de porcentagem',
+    content: 'Python possui operadores matemáticos integrados diretos: `+` para Adição, `-` para Subtração, `*` para Multiplicação e `/` para Divisão. Para calcular porcentagem (ex: quanto é 15% de 200), usamos a expressão `(total * percentual) / 100`.',
+    codeSnippet: 'soma = a + b\nsubtracao = a - b\nmultiplicacao = a * b\ndivisao = a / b\nporcentagem = (total * taxa) / 100'
   },
   {
     step: '03',
     title: 'Tomada de Decisão com `if`, `elif` e `else`',
     summary: 'Como o Python escolhe qual cálculo executar',
     content: 'Usamos a estrutura de controle condicional para comparar a opção escolhida pelo usuário. Se for `+`, executa a soma; se for `-`, a subtração; e assim por diante. O `else` final captura entradas incorretas.',
-    codeSnippet: 'if operacao == "+":\n    resultado = a + b\nelif operacao == "-":\n    resultado = a - b\nelse:\n    print("Operação inválida")'
+    codeSnippet: 'if operacao == "+":\n    resultado = a + b\nelif operacao == "%":\n    resultado = (a * b) / 100\nelse:\n    print("Operação inválida")'
   },
   {
     step: '04',

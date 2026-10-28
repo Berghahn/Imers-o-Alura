@@ -1,4 +1,4 @@
-export type OperationType = '+' | '-' | '*' | '/';
+export type OperationType = '+' | '-' | '*' | '/' | '%';
 
 export interface CalculationRecord {
   id: string;
